@@ -1,0 +1,71 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: LINE Bot on AWS Lambda
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 128
+
+Parameters:
+  ChannelAccessToken:
+    Type: String
+    Description: LINE Channel Access Token
+    NoEcho: true
+
+  ChannelSecret:
+    Type: String
+    Description: LINE Channel Secret
+    NoEcho: true
+
+  OpenRouterApiKey:
+    Type: String
+    Description: OpenRouter API Key for AI responses
+    NoEcho: true
+    Default: ""
+
+  OpenRouterModel:
+    Type: String
+    Description: OpenRouter model to use
+    Default: "meta-llama/llama-4-scout:free"
+
+  EnableSignatureValidation:
+    Type: String
+    Description: Enable/disable signature validation (set to false for testing)
+    Default: "true"
+    AllowedValues: ["true", "false"]
+
+Resources:
+  LineBotFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: app.lambda_handler
+      Runtime: python3.11
+      Environment:
+        Variables:
+          CHANNEL_ACCESS_TOKEN: !Ref ChannelAccessToken
+          CHANNEL_SECRET: !Ref ChannelSecret
+          OPENROUTER_API_KEY: !Ref OpenRouterApiKey
+          OPENROUTER_MODEL: !Ref OpenRouterModel
+          ENABLE_SIGNATURE_VALIDATION: !Ref EnableSignatureValidation
+      Events:
+        LineBotApi:
+          Type: Api
+          Properties:
+            Path: /webhook
+            Method: post
+        HealthCheck:
+          Type: Api
+          Properties:
+            Path: /health
+            Method: get
+
+Outputs:
+  LineBotApi:
+    Description: "API Gateway endpoint URL for LINE Bot"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/webhook"
+
+  LineBotFunction:
+    Description: "LINE Bot Lambda Function ARN"
+    Value: !GetAtt LineBotFunction.Arn
