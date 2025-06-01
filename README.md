@@ -22,6 +22,10 @@ This project contains a Python LINE Bot that runs on AWS Lambda using the Server
 ### 2. Install Dependencies
 
 ```bash
+# Create a virtual environment
+python -m venv venv
+source venv/bin/activate
+
 # Install AWS SAM CLI
 pip install aws-sam-cli
 

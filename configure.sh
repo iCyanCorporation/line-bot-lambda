@@ -66,7 +66,7 @@ ESCAPED_CHANNEL_SECRET=$(printf '%s\n' "$CHANNEL_SECRET" | sed 's/[[\.*^$()+?{|]
 ESCAPED_OPENROUTER_API_KEY=$(printf '%s\n' "$OPENROUTER_API_KEY" | sed 's/[[\.*^$()+?{|]/\\&/g')
 ESCAPED_OPENROUTER_MODEL=$(printf '%s\n' "$OPENROUTER_MODEL" | sed 's/[[\.*^$()+?{|]/\\&/g')
 
-sed -i "s|parameter_overrides = .*|parameter_overrides = \"ChannelAccessToken=\\\"$ESCAPED_CHANNEL_ACCESS_TOKEN\\\" ChannelSecret=\\\"$ESCAPED_CHANNEL_SECRET\\\" OpenRouterApiKey=\\\"$ESCAPED_OPENROUTER_API_KEY\\\" OpenRouterModel=\\\"$ESCAPED_OPENROUTER_MODEL\\\"\"|g" samconfig.toml
+sed -i 's|parameter_overrides = .*|parameter_overrides = \"ChannelAccessToken=\\\"$ESCAPED_CHANNEL_ACCESS_TOKEN\\\" ChannelSecret=\\\"$ESCAPED_CHANNEL_SECRET\\\" OpenRouterApiKey=\\\"$ESCAPED_OPENROUTER_API_KEY\\\" OpenRouterModel=\\\"$ESCAPED_OPENROUTER_MODEL\\\"\"|g' samconfig.toml
 
 echo "✅ Configuration updated!"
 echo ""
