@@ -1,0 +1,21 @@
+{
+  "name": "line-bot-lambda",
+  "version": "1.0.0",
+  "description": "LINE Bot running on AWS Lambda",
+  "scripts": {
+    "test": "pytest",
+    "build": "sam build",
+    "deploy": "./deploy.sh",
+    "local": "sam local start-api",
+    "logs": "sam logs -n LineBotFunction --stack-name line-bot-lambda --tail"
+  },
+  "keywords": [
+    "line",
+    "bot",
+    "aws",
+    "lambda",
+    "serverless"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

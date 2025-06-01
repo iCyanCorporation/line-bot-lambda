@@ -1,0 +1,4 @@
+# Development requirements
+pytest==7.4.0
+pytest-mock==3.11.1
+moto==4.2.0  # For AWS service mocking

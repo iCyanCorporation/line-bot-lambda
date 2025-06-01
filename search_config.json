@@ -1,0 +1,8 @@
+{
+  "search_settings": {
+    "max_results": 3,
+    "summary_length": 300,
+    "enable_auto_search": true,
+    "default_region": "us-en"
+  }
+}
