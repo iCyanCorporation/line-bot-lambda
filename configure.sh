@@ -35,8 +35,8 @@ read -p "Select model (1-5) or press Enter for default [1]: " MODEL_CHOICE
 case $MODEL_CHOICE in
     1|"") OPENROUTER_MODEL="anthropic/claude-3.5-sonnet" ;;
     2) OPENROUTER_MODEL="openai/gpt-4o" ;;
-    3) OPENROUTER_MODEL="meta-llama/llama-3.1-8b-instruct" ;;
-    4) OPENROUTER_MODEL="google/gemini-pro" ;;
+    3) OPENROUTER_MODEL="meta-llama/llama-4-scout:free" ;;
+    4) OPENROUTER_MODEL="openai/gpt-4.1-nano" ;;
     5) 
         read -p "Enter custom model name: " OPENROUTER_MODEL
         ;;
